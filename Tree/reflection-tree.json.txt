@@ -1,0 +1,131 @@
+{
+  "metadata": {
+    "name": "DT Management Operating System - Reflection Module",
+    "version": "1.1",
+    "description": "Deterministic tree covering Locus, Orientation, and Radius."
+  },
+  "nodes": [
+    { "id": "START", "type": "start", "text": "Good evening. Let's reflect on your day.", "next": "A1_Q1" },
+
+    { "id": "A1_Q1", "type": "question", "text": "How would you describe your day?", 
+      "options": ["Productive", "Mixed", "Tough", "Frustrating"], "next": "A1_D1" },
+
+    { "id": "A1_D1", "type": "decision", "rules": [
+        { "if": ["Productive", "Mixed"], "goTo": "A1_Q2_HIGH" },
+        { "if": ["Tough", "Frustrating"], "goTo": "A1_Q2_LOW" }
+    ]},
+
+    { "id": "A1_Q2_HIGH", "type": "question", 
+      "text": "Since things went well, what was the primary driver?", 
+      "options": ["My planning", "My persistence", "External support", "Pure luck"], 
+      "next": "A1_D_AGENCY_CHECK" },
+
+    { "id": "A1_Q2_LOW", "type": "question", 
+      "text": "When things didn't go as planned, what was your reaction?", 
+      "options": ["Looked for solutions", "Found a workaround", "Wait for instructions", "Felt stuck"], 
+      "next": "A1_D_AGENCY_CHECK" },
+
+    { "id": "A1_D_AGENCY_CHECK", "type": "decision", "rules": [
+        { "if": ["My planning", "My persistence", "Looked for solutions", "Found a workaround"], "goTo": "A1_Q3_INT", "signal": "axis1:internal" },
+        { "if": ["External support", "Pure luck", "Wait for instructions", "Felt stuck"], "goTo": "A1_Q3_EXT", "signal": "axis1:external" }
+    ]},
+
+    { "id": "A1_Q3_INT", "type": "question",
+      "text": "How did it feel to take charge of those moments?",
+      "options": ["Empowering", "Natural", "Exhausting", "Necessary"],
+      "next": "A1_R1" },
+
+    { "id": "A1_Q3_EXT", "type": "question",
+      "text": "Looking back, was there even one small thing you could have influenced?",
+      "options": ["Yes, my reaction", "Yes, my timing", "Maybe a little", "No, nothing"],
+      "next": "A1_D_REFRAME" },
+
+    { "id": "A1_D_REFRAME", "type": "decision", "rules": [
+        { "if": ["Yes, my reaction", "Yes, my timing", "Maybe a little"], "goTo": "A1_R1" },
+        { "if": ["No, nothing"], "goTo": "A1_R2" }
+    ]},
+
+    { "id": "A1_R1", "type": "reflection",
+      "text": "You acknowledged your agency today. That 'Victor' mindset turns obstacles into data points.",
+      "next": "BRIDGE_1_2" },
+
+    { "id": "A1_R2", "type": "reflection",
+      "text": "It’s okay to feel overwhelmed by circumstances. Tomorrow, we’ll look for the smallest gap where you can exert control.",
+      "next": "BRIDGE_1_2" },
+
+    { "id": "BRIDGE_1_2", "type": "bridge",
+      "text": "Now, let’s shift from how you handled things to what you contributed to the environment.",
+      "next": "A2_Q1" },
+
+    { "id": "A2_Q1", "type": "question",
+      "text": "Which interaction stands out most from your afternoon?",
+      "options": ["Helping a colleague", "Completing a task early", "Waiting for feedback", "Correcting someone's error"],
+      "next": "A2_D1" },
+
+    { "id": "A2_D1", "type": "decision", "rules": [
+        { "if": ["Helping a colleague", "Completing a task early"], "goTo": "A2_Q2_CONTRIB", "signal": "axis2:contribution" },
+        { "if": ["Waiting for feedback", "Correcting someone's error"], "goTo": "A2_Q2_ENTITLE", "signal": "axis2:entitlement" }
+    ]},
+
+    { "id": "A2_Q2_CONTRIB", "type": "question",
+      "text": "What was the goal of that contribution?",
+      "options": ["Team success", "Personal growth", "Solving a block", "Helping a peer"],
+      "next": "A2_R1" },
+
+    { "id": "A2_Q2_ENTITLE", "type": "question",
+      "text": "In that moment, what did you feel you were owed?",
+      "options": ["More clarity", "More respect", "More time", "Nothing specific"],
+      "next": "A2_D_TRANSITION" },
+
+    { "id": "A2_D_TRANSITION", "type": "decision", "rules": [
+        { "if": ["More clarity", "More respect", "More time"], "goTo": "A2_R2" },
+        { "if": ["Nothing specific"], "goTo": "A2_R1" }
+    ]},
+
+    { "id": "A2_R1", "type": "reflection",
+      "text": "By focusing on value-add, you’re building social capital and operational flow.",
+      "next": "BRIDGE_2_3" },
+
+    { "id": "A2_R2", "type": "reflection",
+      "text": "Noticing gaps in what you receive is the first step toward communicating your needs effectively.",
+      "next": "BRIDGE_2_3" },
+
+    { "id": "BRIDGE_2_3", "type": "bridge",
+      "text": "Finally, let's look at the radius of your perspective today.",
+      "next": "A3_Q1" },
+
+    { "id": "A3_Q1", "type": "question",
+      "text": "When you were under pressure today, whose needs were on your mind?",
+      "options": ["My own", "My immediate team", "The whole company", "The end user"],
+      "next": "A3_D1" },
+
+    { "id": "A3_D1", "type": "decision", "rules": [
+        { "if": ["My own"], "goTo": "A3_Q2_SELF", "signal": "axis3:self" },
+        { "if": ["My immediate team", "The whole company", "The end user"], "goTo": "A3_Q2_OTHERS", "signal": "axis3:altro" }
+    ]},
+
+    { "id": "A3_Q2_SELF", "type": "question",
+      "text": "What was the main driver of your internal focus?",
+      "options": ["Stress level", "Deadlines", "Lack of info", "Performance anxiety"],
+      "next": "A3_R1" },
+
+    { "id": "A3_Q2_OTHERS", "type": "question",
+      "text": "How did considering them change your decision-making?",
+      "options": ["More patience", "Better priority", "Higher quality", "Felt connected"],
+      "next": "A3_R2" },
+
+    { "id": "A3_R1", "type": "reflection",
+      "text": "Self-focus is a survival mechanism. As things calm down, try to see the 'we' in the workflow.",
+      "next": "SUMMARY" },
+
+    { "id": "A3_R2", "type": "reflection",
+      "text": "Widening your lens reduces the weight of personal stress. You’re part of a larger system.",
+      "next": "SUMMARY" },
+
+    { "id": "SUMMARY", "type": "summary",
+      "text": "Reflection Complete: You started the day feeling '{A1_Q1.answer}'. Through your choices, you practiced {axis1.dominant} locus and {axis2.dominant} orientation. Keep this awareness for tomorrow.",
+      "next": "END" },
+
+    { "id": "END", "type": "end", "text": "Systems updated. See you tomorrow." }
+  ]
+}
