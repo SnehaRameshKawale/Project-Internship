@@ -94,7 +94,7 @@ This project can be extended into a CLI/Web app that:
 
 ## ✍️ Author
 
-* Name: Your Name
+* Name: Sneha R. Kawale
 * Role: Business Analyst / Data Science Candidate
 
 ---
